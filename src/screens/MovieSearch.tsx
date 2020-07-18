@@ -27,6 +27,11 @@ const MovieSearch = ({movies, reduxSearchMovie}: any) => {
     setMoviesListSuggestions(null);
   };
 
+  const onSelectedMovieClear = () => {
+    setSelectedMovie(null);
+    setInputSearchValue('');
+  };
+
   const movieSuggestions = moviesListSuggestions?.map((ele, key) => (
     <MovieSuggestion
       key={key}
@@ -44,6 +49,12 @@ const MovieSearch = ({movies, reduxSearchMovie}: any) => {
         <SelectedMovieText>
           {selectedMovie.Title} ({selectedMovie.Year})
         </SelectedMovieText>
+        <SelectedMovieClear
+          onPress={() => {
+            onSelectedMovieClear();
+          }}>
+          <SelectedMovieClearText>Clear</SelectedMovieClearText>
+        </SelectedMovieClear>
       </SelectedMovie>
     ) : (
       <SelectedMovieEmpty>
@@ -86,6 +97,15 @@ const MovieSuggestion = styled.TouchableOpacity`
   border-color: #bebebe;
   color: #3f3f3f;
   padding: 5px 5px 10px 10px;
+`;
+
+const SelectedMovieClear = styled.TouchableOpacity`
+  margin-top: 10px;
+`;
+
+const SelectedMovieClearText = styled.Text`
+  font-size: 16px;
+  color: #337ba2;
 `;
 
 const MovieSuggestionText = styled.Text`
